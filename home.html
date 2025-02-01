@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Fun STEM Games for Kids</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #000;
+      color: white;
+      margin: 0;
+      padding: 10px;
+      overflow-x: hidden;
+    }
+    header {
+      background: black;
+      color: white;
+      padding: 40px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .star-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.9;
+      animation: twinkle 2s infinite alternate ease-in-out;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .header-content h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.5);
+    }
+    .rocket {
+      font-size: 36px;
+      animation: float 1.5s infinite alternate ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
+    .content {
+      margin: 20px auto;
+      max-width: 800px;
+      line-height: 1.6;
+    }
+    .game-container {
+      margin-top: 40px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+      display: inline-block;
+    }
+    .game-description {
+      font-size: 16px;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .link-btn {
+      display: inline-block;
+      background-color: #555;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    .link-btn:hover {
+      background-color: #777;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="star-container"></div> <!-- Container for procedurally generated stars -->
+    <div class="header-content">
+      <span class="rocket">🚀</span>
+      <h1>Fun STEM Games for Kids</h1>
+      <span class="rocket">🚀</span>
+    </div>
+  </header>
+
+  <div class="content">
+    <p>
+      Hi, I’m creating fun, interactive games for my two daughters to help them explore and learn about science, math, and engineering.
+    </p>
+
+    <div class="game-container">
+      <p class="game-description">
+        Play with a robot arm and learn how motors work. Can you make the robot reach the target?
+      </p>
+      <a href="https://tdit84.github.io/robot-arm-game/" class="link-btn" target="_blank">🤖 Play the Robot Arm Game</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Made with ❤️ by a loving parent for their kids.</p>
+  </footer>
+
+  <script>
+    function createStars() {
+      const starContainer = document.querySelector('.star-container');
+      for (let i = 0; i < 30; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        const size = Math.random() * 3 + 1 + "px";
+        star.style.width = size;
+        star.style.height = size;
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.animationDuration = (Math.random() * 2 + 1) + "s";
+        starContainer.appendChild(star);
+      }
+    }
+    createStars();
+  </script>
+</body>
+</html>
