@@ -107,7 +107,7 @@
 </head>
 <body>
   <header>
-    <div class="star-container"></div> <!-- Container for procedurally generated stars -->
+    <div class="star-container"></div>
     <div class="header-content">
       <span class="rocket">🚀</span>
       <h1>Fun STEM Games for Kids</h1>
@@ -131,23 +131,5 @@
   <footer>
     <p>Made with ❤️ by a loving parent for their kids.</p>
   </footer>
-
-  <script>
-    function createStars() {
-      const starContainer = document.querySelector('.star-container');
-      for (let i = 0; i < 30; i++) {
-        const star = document.createElement("div");
-        star.classList.add("star");
-        const size = Math.random() * 3 + 1 + "px";
-        star.style.width = size;
-        star.style.height = size;
-        star.style.top = Math.random() * 100 + "%";
-        star.style.left = Math.random() * 100 + "%";
-        star.style.animationDuration = (Math.random() * 2 + 1) + "s";
-        starContainer.appendChild(star);
-      }
-    }
-    createStars();
-  </script>
 </body>
 </html>
