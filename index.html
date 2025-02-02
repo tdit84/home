@@ -71,18 +71,30 @@
       max-width: 800px;
       line-height: 1.6;
     }
+    /* Styles for accordion sections */
+    details {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin: 20px 0;
+      padding: 10px;
+    }
+    summary {
+      font-size: 20px;
+      cursor: pointer;
+      padding: 5px;
+      outline: none;
+    }
     .game-container {
-      margin-top: 40px;
+      margin: 20px auto;
       padding: 15px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-      display: inline-block;
-      margin-bottom: 20px;
+      max-width: 600px;
+      text-align: left;
     }
     .game-description {
       font-size: 16px;
-      color: white;
       margin-bottom: 10px;
     }
     .link-btn {
@@ -120,42 +132,52 @@
     <p>
       Hi, I’m creating fun, interactive games for my two daughters to help them explore and learn about science, math, and engineering.
     </p>
-
-    <div class="game-container">
-      <p class="game-description">
-        Play with a robot arm and learn how motors work. Can you make the robot reach the target?
-      </p>
-      <a href="https://tdit84.github.io/robot-arm-game/" class="link-btn" target="_blank">🤖 Play the Robot Arm Game</a>
-    </div>
-
-    <div class="game-container">
-      <p class="game-description">
-        Control a robot car and collect wrenches. Tap to move and avoid obstacles!
-      </p>
-      <a href="https://tdit84.github.io/robot-car-wrench-game/" class="link-btn" target="_blank">🚗 Play the Robot Car Game</a>
-    </div>
-
-    <div class="game-container">
-      <p class="game-description">
-        Convert mixed numbers to improper fractions and challenge your math skills!
-      </p>
-      <a href="https://tdit84.github.io/mixed_numbers_to_improper_fractions/" class="link-btn" target="_blank">🧮 Play the Mixed Numbers Game</a>
-    </div>
-
-    <div class="game-container">
-      <p class="game-description">
-        Convert decimals to fractions seamlessly and explore a world of numbers!
-      </p>
-      <a href="https://tdit84.github.io/decimals_to_fractions/" class="link-btn" target="_blank">🔢 Play Decimals to Fractions</a>
-    </div>
     
-    <!-- New game container for Multiply Fractions -->
-    <div class="game-container">
-      <p class="game-description">
-        Multiply fractions easily and see the magic of numbers come together!
-      </p>
-      <a href="https://tdit84.github.io/multiply_fractions/" class="link-btn" target="_blank">✖️ Play Multiply Fractions</a>
-    </div>
+    <!-- Robot Games Accordion Section -->
+    <details open>
+      <summary>🤖 Robot Games</summary>
+      <div class="game-container">
+        <p class="game-description">
+          Play with a robot arm and learn how motors work. Can you make the robot reach the target?
+        </p>
+        <a href="https://tdit84.github.io/robot-arm-game/" class="link-btn" target="_blank">Play the Robot Arm Game</a>
+      </div>
+      <div class="game-container">
+        <p class="game-description">
+          Control a robot car and collect wrenches. Tap to move and avoid obstacles!
+        </p>
+        <a href="https://tdit84.github.io/robot-car-wrench-game/" class="link-btn" target="_blank">Play the Robot Car Game</a>
+      </div>
+    </details>
+    
+    <!-- Math Games Accordion Section -->
+    <details open>
+      <summary>🔢 Math Games</summary>
+      <div class="game-container">
+        <p class="game-description">
+          Convert mixed numbers to improper fractions and challenge your math skills!
+        </p>
+        <a href="https://tdit84.github.io/mixed_numbers_to_improper_fractions/" class="link-btn" target="_blank">Play the Mixed Numbers Game</a>
+      </div>
+      <div class="game-container">
+        <p class="game-description">
+          Convert decimals to fractions seamlessly and explore a world of numbers!
+        </p>
+        <a href="https://tdit84.github.io/decimals_to_fractions/" class="link-btn" target="_blank">Play Decimals to Fractions</a>
+      </div>
+      <div class="game-container">
+        <p class="game-description">
+          Multiply fractions easily and see the magic of numbers come together!
+        </p>
+        <a href="https://tdit84.github.io/multiply_fractions/" class="link-btn" target="_blank">Play Multiply Fractions</a>
+      </div>
+      <div class="game-container">
+        <p class="game-description">
+          Practice adding money by rounding amounts and challenge your mental math!
+        </p>
+        <a href="https://tdit84.github.io/add_money_by_rounding/" class="link-btn" target="_blank">Play Add Money by Rounding</a>
+      </div>
+    </details>
   </div>
 
   <footer>
