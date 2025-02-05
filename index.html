@@ -15,157 +15,266 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #000;
+      text-align: center;
+      background-color: #000;
       color: white;
       margin: 0;
       padding: 10px;
+      overflow-x: hidden;
     }
     header {
       background: black;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    /* Tab styles */
-    .tabs {
+      color: white;
+      padding: 40px 0;
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
-    .tabs label {
-      padding: 10px 20px;
-      background: #555;
-      margin: 0 2px;
-      cursor: pointer;
-      border-radius: 5px 5px 0 0;
+    .star-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
     }
-    .tabs label:hover {
-      background: #777;
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.9;
+      animation: twinkle 2s infinite alternate ease-in-out;
     }
-    input[name="tabs"] {
-      display: none;
+    @keyframes twinkle {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
     }
-    .tab-content {
-      border: 1px solid #555;
-      border-top: none;
-      padding: 20px;
-      border-radius: 0 5px 5px 5px;
-      display: none;
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
     }
-    input[name="tabs"]:checked + label {
-      background: #333;
+    .header-content h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.5);
     }
-    input[name="tabs"]:checked + label + .tab-content {
-      display: block;
+    .rocket {
+      font-size: 36px;
+      animation: float 1.5s infinite alternate ease-in-out;
     }
-    /* Game card styles */
-    .game-card {
-      background: rgba(255,255,255,0.1);
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
+    .content {
+      margin: 20px auto;
+      max-width: 800px;
+      line-height: 1.6;
+      text-align: left;
+    }
+    /* Top-level accordion for categories */
+    details {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      margin: 20px 0;
       padding: 10px;
-      margin: 10px;
-      border-radius: 5px;
-      text-align: center;
     }
-    .game-card p {
-      font-size: 16px;
-      margin: 10px 0;
+    summary {
+      font-size: 20px;
+      cursor: pointer;
+      padding: 5px;
+      outline: none;
     }
-    .game-card a {
-      background: #555;
+    /* Nested accordion for Math Games sub-categories */
+    .nested details {
+      background: rgba(255, 255, 255, 0.05);
+      margin: 10px 0 10px 20px;
       padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .nested summary {
+      font-size: 18px;
+      cursor: pointer;
+      padding: 3px;
+    }
+    .game-container {
+      margin: 10px 30px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    }
+    .game-description {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .link-btn {
+      display: inline-block;
+      background-color: #555;
       color: white;
       text-decoration: none;
-      border-radius: 3px;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
     }
-    .game-card a:hover {
-      background: #777;
+    .link-btn:hover {
+      background-color: #777;
     }
     footer {
-      text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
       font-size: 14px;
       color: #aaa;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Fun STEM Games for Kids</h1>
+    <div class="star-container"></div>
+    <div class="header-content">
+      <span class="rocket">🚀</span>
+      <h1>Fun STEM Games for Kids</h1>
+      <span class="rocket">🚀</span>
+    </div>
   </header>
-  
-  <div class="tabs">
-    <input type="radio" id="tab1" name="tabs" checked>
-    <label for="tab1">🤖 Robot Games</label>
-    <input type="radio" id="tab2" name="tabs">
-    <label for="tab2">🔢 Math Games</label>
-    <input type="radio" id="tab3" name="tabs">
-    <label for="tab3">🎮 Eva's Games</label>
+
+  <div class="content">
+    <p>
+      Hi, I’m creating fun, interactive games for my two daughters to help them explore and learn about science, math, and engineering.
+    </p>
+    
+    <!-- Robot Games Section -->
+    <details>
+      <summary>🤖 Robot Games</summary>
+      <div class="game-container">
+        <p class="game-description">
+          Play with a robot arm and learn how motors work. Can you make the robot reach the target?
+        </p>
+        <a href="https://tdit84.github.io/robot-arm-game/" class="link-btn" target="_blank">Play the Robot Arm Game</a>
+      </div>
+      <div class="game-container">
+        <p class="game-description">
+          Control a robot car and collect wrenches. Tap to move and avoid obstacles!
+        </p>
+        <a href="https://tdit84.github.io/robot-car-wrench-game/" class="link-btn" target="_blank">Play the Robot Car Game</a>
+      </div>
+    </details>
+    
+    <!-- Math Games Section with double nested dropdown -->
+    <details>
+      <summary>🔢 Math Games</summary>
+      <div class="nested">
+        <!-- Category 1: Fraction Conversions -->
+        <details>
+          <summary>Fraction Conversions</summary>
+          <div class="game-container">
+            <p class="game-description">
+              Convert mixed numbers to improper fractions.
+            </p>
+            <a href="https://tdit84.github.io/mixed_numbers_to_improper_fractions/" class="link-btn" target="_blank">Play Mixed Numbers Game</a>
+          </div>
+          <div class="game-container">
+            <p class="game-description">
+              Convert decimals to fractions seamlessly.
+            </p>
+            <a href="https://tdit84.github.io/decimals_to_fractions/" class="link-btn" target="_blank">Play Decimals to Fractions</a>
+          </div>
+        </details>
+        <!-- Category 2: Operations -->
+        <details>
+          <summary>Operations</summary>
+          <div class="game-container">
+            <p class="game-description">
+              Multiply fractions easily.
+            </p>
+            <a href="https://tdit84.github.io/multiply_fractions/" class="link-btn" target="_blank">Play Multiply Fractions</a>
+          </div>
+          <div class="game-container">
+            <p class="game-description">
+              Practice adding money by rounding amounts.
+            </p>
+            <a href="https://tdit84.github.io/add_money_by_rounding/" class="link-btn" target="_blank">Play Add Money by Rounding</a>
+          </div>
+          <div class="game-container">
+            <p class="game-description">
+              Multiply by counting zeros.
+            </p>
+            <a href="https://tdit84.github.io/multiply_by_counting_zeros/" class="link-btn" target="_blank">Play Multiply by Counting Zeros</a>
+          </div>
+        </details>
+        <!-- Category 3: Decimal Challenges -->
+        <details>
+          <summary>Decimal Challenges</summary>
+          <div class="game-container">
+            <p class="game-description">
+              Convert decimals to percents.
+            </p>
+            <a href="https://tdit84.github.io/decimals_to_percents_game/" class="link-btn" target="_blank">Play Decimals to Percents Game</a>
+          </div>
+          <div class="game-container">
+            <p class="game-description">
+              Arrange decimals in order.
+            </p>
+            <a href="https://tdit84.github.io/order_decimals_game/" class="link-btn" target="_blank">Play Order Decimals Game</a>
+          </div>
+          <div class="game-container">
+            <p class="game-description">
+              Master exponents in this power-packed challenge.
+            </p>
+            <a href="https://tdit84.github.io/exponents_game/" class="link-btn" target="_blank">Play Exponents Game</a>
+          </div>
+        </details>
+      </div>
+    </details>
+    
+    <!-- Eva's Games Section -->
+    <details>
+      <summary>🎮 Eva’s Games</summary>
+      <div class="game-container">
+        <p class="game-description">
+          This is a soccer game – play Classic Football!
+        </p>
+        <a href="https://tdit84.github.io/classic_football/" class="link-btn" target="_blank">Play Classic Football</a>
+      </div>
+      <div class="game-container">
+        <p class="game-description">
+          This one is American football – check out American Football!
+        </p>
+        <a href="https://tdit84.github.io/american_football/" class="link-btn" target="_blank">Play American Football</a>
+      </div>
+    </details>
+    
   </div>
-  
-  <div class="tab-content">
-    <!-- Robot Games Tab -->
-    <div class="game-card">
-      <p>Play with a robot arm and learn how motors work. Can you make the robot reach the target?</p>
-      <a href="https://tdit84.github.io/robot-arm-game/" target="_blank">Play the Robot Arm Game</a>
-    </div>
-    <div class="game-card">
-      <p>Control a robot car and collect wrenches. Tap to move and avoid obstacles!</p>
-      <a href="https://tdit84.github.io/robot-car-wrench-game/" target="_blank">Play the Robot Car Game</a>
-    </div>
-  </div>
-  
-  <div class="tab-content">
-    <!-- Math Games Tab -->
-    <div class="game-card">
-      <p>Convert mixed numbers to improper fractions and challenge your math skills!</p>
-      <a href="https://tdit84.github.io/mixed_numbers_to_improper_fractions/" target="_blank">Play the Mixed Numbers Game</a>
-    </div>
-    <div class="game-card">
-      <p>Convert decimals to fractions seamlessly and explore a world of numbers!</p>
-      <a href="https://tdit84.github.io/decimals_to_fractions/" target="_blank">Play Decimals to Fractions</a>
-    </div>
-    <div class="game-card">
-      <p>Multiply fractions easily and see the magic of numbers come together!</p>
-      <a href="https://tdit84.github.io/multiply_fractions/" target="_blank">Play Multiply Fractions</a>
-    </div>
-    <div class="game-card">
-      <p>Practice adding money by rounding amounts and challenge your mental math!</p>
-      <a href="https://tdit84.github.io/add_money_by_rounding/" target="_blank">Play Add Money by Rounding</a>
-    </div>
-    <div class="game-card">
-      <p>Multiply by counting zeros to master place value in a fun and interactive way!</p>
-      <a href="https://tdit84.github.io/multiply_by_counting_zeros/" target="_blank">Play Multiply by Counting Zeros</a>
-    </div>
-    <div class="game-card">
-      <p>Convert decimals to percents with ease and boost your percentage skills!</p>
-      <a href="https://tdit84.github.io/decimals_to_percents_game/" target="_blank">Play Decimals to Percents Game</a>
-    </div>
-    <div class="game-card">
-      <p>Arrange decimals in order and boost your number sense!</p>
-      <a href="https://tdit84.github.io/order_decimals_game/" target="_blank">Play Order Decimals Game</a>
-    </div>
-    <div class="game-card">
-      <p>Test your power skills by mastering exponents in this fun game!</p>
-      <a href="https://tdit84.github.io/exponents_game/" target="_blank">Play Exponents Game</a>
-    </div>
-  </div>
-  
-  <div class="tab-content">
-    <!-- Eva's Games Tab -->
-    <div class="game-card">
-      <p>This is a soccer game – play Classic Football!</p>
-      <a href="https://tdit84.github.io/classic_football/" target="_blank">Play Classic Football</a>
-    </div>
-    <div class="game-card">
-      <p>This one is American football – check out American Football!</p>
-      <a href="https://tdit84.github.io/american_football/" target="_blank">Play American Football</a>
-    </div>
-  </div>
-  
+
   <footer>
     <p>Made with ❤️ by a loving parent for their kids.</p>
   </footer>
+
+  <script>
+    function createStars() {
+      const starContainer = document.querySelector('.star-container');
+      for (let i = 0; i < 30; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        const size = Math.random() * 3 + 1 + "px";
+        star.style.width = size;
+        star.style.height = size;
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+        star.style.animationDuration = (Math.random() * 2 + 1) + "s";
+        starContainer.appendChild(star);
+      }
+    }
+    createStars();
+  </script>
 </body>
 </html>
