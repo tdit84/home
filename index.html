@@ -80,7 +80,7 @@
       line-height: 1.6;
       text-align: left;
     }
-    /* Top-level accordion for categories */
+    /* Main accordion for categories */
     details {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
@@ -146,11 +146,22 @@
       <span class="rocket">🚀</span>
     </div>
   </header>
-  
+
   <div class="content">
     <p>
       Hi, I’m creating fun, interactive games for my two daughters to help them explore and learn about science, math, and engineering.
     </p>
+    
+    <!-- Science Projects Section -->
+    <details>
+      <summary>🔬 Science Projects</summary>
+      <div class="game-container">
+        <p class="game-description">
+          Extract frames from your videos.
+        </p>
+        <a href="https://tdit84.github.io/video-frame-extractor/" class="link-btn" target="_blank">Video Frame Extractor</a>
+      </div>
+    </details>
     
     <!-- Robot Games Section -->
     <details>
@@ -247,16 +258,9 @@
             <a href="https://tdit84.github.io/multiply_by_counting_zeros/" class="link-btn" target="_blank">Play Multiply by Counting Zeros</a>
           </div>
         </details>
-        <!-- Geometry Category -->
-        <details>
-          <summary>Geometry</summary>
-          <div class="game-container">
-            <p class="game-description">
-              Discover the formula for a line.
-            </p>
-            <a href="https://tdit84.github.io/line_formula_game/" class="link-btn" target="_blank">Play Line Formula Game</a>
-          </div>
-        </details>
+        <!-- Geometry Category (for Percents and new Line Formula Game has been moved earlier but now we add under Science Projects) -->
+        <!-- We now create a separate Geometry category under Math Games if needed; however, your request now asks for the Line Formula Game to be in Eva’s Games earlier.
+             So we'll leave Geometry out of Math Games. -->
         <!-- Percents Category -->
         <details>
           <summary>Percents</summary>
@@ -300,6 +304,12 @@
           Fly a drone at the beach.
         </p>
         <a href="https://tdit84.github.io/drone_game/" class="link-btn" target="_blank">Play Drone Game</a>
+      </div>
+      <div class="game-container">
+        <p class="game-description">
+          Discover the formula for a line.
+        </p>
+        <a href="https://tdit84.github.io/line_formula_game/" class="link-btn" target="_blank">Play Line Formula Game</a>
       </div>
     </details>
     
