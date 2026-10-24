@@ -18,6 +18,12 @@ main{max-width:920px;padding-top:18px}.hero{grid-template-columns:1.2fr 1fr;gap:
 @media(max-width:720px){main{padding:16px}.hero{grid-template-columns:1fr auto;padding:0 4px 12px;gap:6px}.hero .illustration{width:116px;margin:0}.tag{font-size:10px;letter-spacing:.1em}h1{font-size:33px;line-height:1.1;margin:8px 0 0}.dashboard{gap:14px}.card{padding:20px;border-radius:20px}.amount{margin:3px 0 10px}.amount strong{font-size:44px}.stats{margin-bottom:15px}.milestone{padding:11px 13px}.warning{padding:11px 13px;font-size:12px;margin-top:14px}.card h2{font-size:22px}.choices{margin:16px 0}.choice{padding:10px 4px}.pledge-copy{font-size:14px;margin-top:6px}.button{padding:13px}.small{margin:10px 0}.privacy{margin-bottom:0}footer{font-size:11px;margin-top:10px;padding:10px 20px 18px}}
 
 button.choice{font:650 16px system-ui;color:var(--ink);background:transparent;cursor:pointer}button.choice.featured{background:#51382f;color:#ffd2a9}#inline-pledge{border:0;padding:0}#inline-pledge>summary{list-style:none}#inline-pledge>summary::-webkit-details-marker{display:none}#inline-pledge[open]>summary{background:#3e3049;color:var(--ink);margin-bottom:14px}#embedded-form iframe{display:block;width:100%;min-height:690px;background:#f0ebf7;border-radius:12px}#pledge{min-width:0}@media(max-width:720px){#embedded-form{margin:0 -12px}#embedded-form iframe{min-height:760px}}
+
+#pledge-form label{display:block;font-size:13px;font-weight:650;margin:17px 0 7px;color:#e8dcee}
+#pledge-form input{width:100%;min-width:0;background:#1c1625;color:var(--ink);border:1px solid #66516f;border-radius:11px;padding:12px 14px;font:16px system-ui}
+#pledge-form input:focus{outline:2px solid var(--orange);outline-offset:2px}#pledge-form .choices{margin:8px 0 12px}
+.amount-input{position:relative}.amount-input>span{position:absolute;left:15px;top:10px;color:var(--muted);font-size:20px}#pledge-form .amount-input input{padding-left:36px}
+#submit-pledge{width:100%;margin-top:19px}#submit-pledge:disabled{opacity:.65;cursor:wait}#pledge-status{font-size:14px;margin:12px 0 0;color:#ffdbb7}#pledge-status:empty{display:none}.honey{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.success{background:#2f4036;border:1px solid #709d76;border-radius:12px;padding:17px;color:#dbf3dc}.success strong{display:block;margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -44,24 +50,76 @@ button.choice{font:650 16px system-ui;color:var(--ink);background:transparent;cu
 </section>
 <section class="dashboard" aria-label="Fundraising progress and pledge">
 <article class="card"><span class="tag">Our progress</span><div class="amount"><strong id="total">$80</strong><span id="goal">pledged of $200</span></div><progress id="progress" value="80" max="200" aria-label="Fundraiser progress">$80 of $200</progress><div class="stats"><span id="percent">40% pledged</span><span id="remaining">$120 to go</span></div><p class="milestone" id="milestone">Just <strong>4 families at $30</strong> to reach our goal!</p><p class="small" id="freshness">Checking the latest total…</p><aside class="warning"><strong>Heads up: updates aren’t instant.</strong>After you submit a pledge, the public total may take a few minutes to refresh. Please don’t submit again just because the number hasn’t changed.</aside></article>
-<article class="card" id="pledge"><h2>Add your pledge</h2><p class="pledge-copy">$30 suggested per family. Any amount welcome.</p><div class="choices" aria-label="Choose a pledge amount"><button type="button" class="choice" data-pledge="10" aria-label="Pledge 10 dollars">$10</button><button type="button" class="choice" data-pledge="20" aria-label="Pledge 20 dollars">$20</button><button type="button" class="choice featured" data-pledge="30" aria-label="Pledge 30 dollars">$30 ★</button><button type="button" class="choice" data-pledge="50" aria-label="Pledge 50 dollars">$50</button></div><details id="inline-pledge"><summary class="button">Pledge now</summary><div id="embedded-form"></div></details><p class="small">Complete the short form right here. No sign-in needed.</p><p class="small privacy">Only the combined total is public. Family names and individual amounts stay private.</p></article>
+<article class="card" id="pledge"><h2>Add your pledge</h2><p class="pledge-copy">$30 suggested per family. Any amount welcome.</p><form id="pledge-form">
+<label for="family">Family name</label><input id="family" name="family" autocomplete="family-name" maxlength="80" required placeholder="Your family name">
+<label for="amount">Pledge amount</label><div class="choices" aria-label="Choose a pledge amount"><button type="button" class="choice" data-pledge="10" aria-pressed="false">$10</button><button type="button" class="choice" data-pledge="20" aria-pressed="false">$20</button><button type="button" class="choice featured" data-pledge="30" aria-pressed="true">$30</button><button type="button" class="choice" data-pledge="50" aria-pressed="false">$50</button></div>
+<div class="amount-input"><span aria-hidden="true">$</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0.01" max="10000" step="0.01" value="30" required aria-label="Pledge amount in dollars"></div>
+<div class="honey" aria-hidden="true"><label for="website">Leave blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+<button class="button" id="submit-pledge" type="submit">Submit pledge</button><p id="pledge-status" role="status" aria-live="polite"></p>
+</form><p class="small privacy">Only the combined total is public. Family names and individual amounts stay private.</p></article>
 </section>
 
 </main><footer><span>Halloween block party · October 31</span></footer>
 <script>
-const EMBED_BASE="https://docs.google.com/forms/d/e/1FAIpQLSf8gawxr5EZIExFagD9mEXy0VN_3ypdWpK0OKan6C7vp3YYZQ/viewform?embedded=true&usp=pp_url&entry.386686820=";
-const pledgeDetails=document.getElementById('inline-pledge');
-function loadPledge(amount=30){
-  let frame=document.querySelector('#embedded-form iframe');
-  if(!frame){frame=document.createElement('iframe');frame.title='Private family pledge form';frame.referrerPolicy='strict-origin-when-cross-origin';document.getElementById('embedded-form').append(frame);}
-  const url=EMBED_BASE+amount;
-  if(frame.getAttribute('src')!==url)frame.src=url;
-}
-pledgeDetails.addEventListener('toggle',()=>{if(pledgeDetails.open&&!document.querySelector('#embedded-form iframe'))loadPledge();});
+const PLEDGE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzHJm0OW2ntswLjTM1QKotYB3omeKh8WAPy0hNqPnXtcLZNYEfrVL9iaNvdKfmd6bedCA/exec';
+const pendingKey='bounce-house-pending-2026';
+const pledgeForm=document.getElementById('pledge-form');
+const familyInput=document.getElementById('family');
+const amountInput=document.getElementById('amount');
+const submitButton=document.getElementById('submit-pledge');
+const pledgeStatus=document.getElementById('pledge-status');
+let pending=null, sending=false;
+try{const saved=JSON.parse(localStorage.getItem(pendingKey));if(saved&&saved.requestId&&saved.family&&Number(saved.amount)>0){pending=saved;familyInput.value=saved.family;amountInput.value=saved.amount;submitButton.textContent='Check & finish pledge';pledgeStatus.textContent='Your earlier pledge may still be processing. Check it here before making another.';}}catch{}
 document.querySelectorAll('[data-pledge]').forEach(button=>button.addEventListener('click',()=>{
-  loadPledge(Number(button.dataset.pledge));pledgeDetails.open=true;
-  document.querySelectorAll('[data-pledge]').forEach(item=>item.classList.toggle('featured',item===button));
+  if(pending)return;
+  amountInput.value=button.dataset.pledge;
+  updateChoices();
 }));
+function updateChoices(){document.querySelectorAll('[data-pledge]').forEach(button=>{const selected=Number(button.dataset.pledge)===Number(amountInput.value);button.classList.toggle('featured',selected);button.setAttribute('aria-pressed',String(selected));});}
+amountInput.addEventListener('input',updateChoices);updateChoices();
+function freezePending(){familyInput.readOnly=!!pending;amountInput.readOnly=!!pending;document.querySelectorAll('[data-pledge]').forEach(button=>button.disabled=!!pending);}
+freezePending();
+function receiptConfirmed(id){
+  return new Promise((resolve)=>{
+    const callback='pledgeReceipt_'+crypto.randomUUID().replaceAll('-','');
+    const script=document.createElement('script');
+    const cleanup=()=>{clearTimeout(timer);script.remove();delete window[callback];};
+    const timer=setTimeout(()=>{cleanup();resolve(false);},18000);
+    window[callback]=(data)=>{cleanup();resolve(data.confirmed===true);};
+    script.onerror=()=>{cleanup();resolve(false);};
+    script.src=PLEDGE_ENDPOINT+'?receipt='+encodeURIComponent(id)+'&callback='+callback;
+    document.head.append(script);
+  });
+}
+function showConfirmed(){
+  try{localStorage.removeItem(pendingKey);}catch{}
+  const box=document.createElement('div');box.className='success';box.setAttribute('role','status');
+  const title=document.createElement('strong');title.textContent='Thank you—your pledge is recorded!';
+  const detail=document.createElement('span');detail.textContent='The public total may take a few minutes to update. Please submit only once.';
+  box.append(title,detail);pledgeForm.replaceWith(box);pending=null;
+  refreshProgress();
+}
+pledgeForm.addEventListener('submit',async(event)=>{
+  event.preventDefault();
+  if(sending||!pledgeForm.reportValidity())return;
+  if(!pending){
+    const amount=Number(amountInput.value),family=familyInput.value.trim();
+    if(!family||!Number.isFinite(amount)||amount<=0||amount>10000){pledgeStatus.textContent='Enter a family name and a valid amount.';return;}
+    pending={family,amount,requestId:crypto.randomUUID(),website:document.getElementById('website').value};
+    try{localStorage.setItem(pendingKey,JSON.stringify(pending));}catch{}
+    freezePending();
+  }
+  sending=true;submitButton.disabled=true;submitButton.textContent='Saving…';pledgeStatus.textContent='Please keep this page open while we confirm your pledge.';
+  try{
+    const response=await fetch(PLEDGE_ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},credentials:'omit',body:JSON.stringify(pending),signal:AbortSignal.timeout(25000)});
+    const result=await response.json();
+    if(result.ok===true&&result.requestId===pending.requestId){showConfirmed();return;}
+    if(result.ok===false&&result.message==='Enter a family name and a valid dollar amount.'){throw new Error(result.message);}
+  }catch{}
+  if(await receiptConfirmed(pending.requestId)){showConfirmed();return;}
+  pledgeStatus.textContent='We couldn’t confirm it yet. Tap “Check & finish pledge” to check and safely retry the same pledge. Please don’t submit a separate pledge.';
+  submitButton.textContent='Check & finish pledge';submitButton.disabled=false;sending=false;
+});
 
 const TOTALS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdiZImvR7WCK2mx1rZwaigmxZgD4Qyb95XO0fx_r-f6-9gFWtaykYIRcqXgBP4XtIGN36GmO0fPMkR/pub?gid=596836111&single=true&output=csv";
 const money = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',minimumFractionDigits:0,maximumFractionDigits:2});
