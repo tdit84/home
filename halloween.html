@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#20182e">
 <title>Halloween Bounce House • Neighborhood Fundraiser</title>
-<meta name="description" content="A little neighborhood magic. Help bring a bounce house to our Halloween block party. $200 goal, $30 suggested per family.">
+<meta name="description" content="Help bring a bounce house to our Halloween block party. Track progress toward our $200 goal.">
 <style>
 :root{color-scheme:dark;--bg:#17121f;--panel:#241d30;--ink:#fff5e5;--muted:#bfb2cb;--orange:#ffab65;--purple:#c6a2f5}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 85% 15%,#392544 0,transparent 46%),var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,sans-serif}
@@ -30,7 +30,7 @@ button.choice{font:650 16px system-ui;color:var(--ink);background:transparent;cu
 
 <main>
 <section class="hero" aria-labelledby="title">
-<div><span class="tag">Block party fundraiser</span><h1>Halloween<br><em>Bounce House</em></h1></div>
+<div><h1>Halloween<br><em>Bounce House</em></h1></div>
 <div class="illustration"><svg class="art" viewBox="0 0 500 390" role="img" aria-label="A colorful bounce house beneath a Halloween moon">
 <circle cx="376" cy="87" r="55" fill="#ffd89a"/><circle cx="355" cy="68" r="52" fill="#35233f"/>
 <g fill="#d4b8ea"><path d="m72 76 3 9 9 3-9 3-3 9-3-9-9-3 9-3Z"/><path d="m441 166 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/><circle cx="170" cy="42" r="2"/><circle cx="291" cy="69" r="2"/><circle cx="465" cy="101" r="2"/></g>
@@ -49,12 +49,13 @@ button.choice{font:650 16px system-ui;color:var(--ink);background:transparent;cu
 </svg></div>
 </section>
 <section class="dashboard" aria-label="Fundraising progress and pledge">
-<article class="card"><span class="tag">Our progress</span><div class="amount"><strong id="total">$80</strong><span id="goal">pledged of $200</span></div><progress id="progress" value="80" max="200" aria-label="Fundraiser progress">$80 of $200</progress><div class="stats"><span id="percent">40% pledged</span><span id="remaining">$120 to go</span></div><p class="milestone" id="milestone">Just <strong>4 families at $30</strong> to reach our goal!</p><p class="small" id="freshness">Checking the latest total…</p><aside class="warning"><strong>Heads up: updates aren’t instant.</strong>After you submit a pledge, the public total may take a few minutes to refresh. Please don’t submit again just because the number hasn’t changed.</aside></article>
-<article class="card" id="pledge"><h2>Add your pledge</h2><p class="pledge-copy">$30 suggested per family. Any amount welcome.</p><form id="pledge-form">
+<article class="card"><span class="tag">Our progress</span><div class="amount"><strong id="total">$80</strong><span id="goal">pledged of $200</span></div><progress id="progress" value="80" max="200" aria-label="Fundraiser progress">$80 of $200</progress><div class="stats"><span id="percent">40% pledged</span><span id="remaining">$120 to go</span></div><p class="milestone" id="milestone">Just <strong>4 families at $30</strong> to reach our goal!</p><p class="small" id="freshness">Checking the latest total…</p></article>
+<article class="card" id="pledge"><h2>Add your pledge</h2><form id="pledge-form">
 <label for="family">Family name</label><input id="family" name="family" autocomplete="family-name" maxlength="80" required placeholder="Your family name">
 <label for="amount">Pledge amount</label><div class="choices" aria-label="Choose a pledge amount"><button type="button" class="choice" data-pledge="10" aria-pressed="false">$10</button><button type="button" class="choice" data-pledge="20" aria-pressed="false">$20</button><button type="button" class="choice featured" data-pledge="30" aria-pressed="true">$30</button><button type="button" class="choice" data-pledge="50" aria-pressed="false">$50</button></div>
 <div class="amount-input"><span aria-hidden="true">$</span><input id="amount" name="amount" type="number" inputmode="decimal" min="0.01" max="10000" step="0.01" value="30" required aria-label="Pledge amount in dollars"></div>
 <div class="honey" aria-hidden="true"><label for="website">Leave blank</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+<aside class="warning"><strong>Heads up: updates aren’t instant.</strong>After you submit a pledge, the public total may take a few minutes to refresh. Please don’t submit again just because the number hasn’t changed.</aside>
 <button class="button" id="submit-pledge" type="submit">Submit pledge</button><p id="pledge-status" role="status" aria-live="polite"></p>
 </form><p class="small privacy">Only the combined total is public. Family names and individual amounts stay private.</p></article>
 </section>
@@ -157,7 +158,7 @@ async function refreshProgress() {
     lastSuccess=new Date();
     status.textContent='Latest published total · checked '+lastSuccess.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
   } catch {
-    status.textContent=lastSuccess?'Showing the last loaded total. Updates are temporarily unavailable.':'Latest total unavailable. Showing the $80 starting pledge—please check back.';
+    status.textContent=lastSuccess?'Showing the last loaded total. Updates are temporarily unavailable.':'Updates are temporarily unavailable.';
   }
 }
 refreshProgress();
