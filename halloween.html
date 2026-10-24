@@ -121,6 +121,18 @@ pledgeForm.addEventListener('submit',async(event)=>{
   submitButton.textContent='Check & finish pledge';submitButton.disabled=false;sending=false;
 });
 
+function parsePublishedTotals(csv) {
+  const rows=[];let row=[],field='',quoted=false;
+  for(let i=0;i<csv.length;i++){
+    const c=csv[i];
+    if(c==='"'){if(quoted&&csv[i+1]==='"'){field+='"';i++;}else quoted=!quoted;}
+    else if(c===','&&!quoted){row.push(field);field='';}
+    else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&csv[i+1]==='\n')i++;row.push(field);rows.push(row);row=[];field='';}
+    else field+=c;
+  }
+  if(field||row.length){row.push(field);rows.push(row);}
+  return Object.fromEntries(rows.slice(1).map(([key,value])=>[key,Number(String(value).replace(/[$,\s]/g,''))]));
+}
 const TOTALS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdiZImvR7WCK2mx1rZwaigmxZgD4Qyb95XO0fx_r-f6-9gFWtaykYIRcqXgBP4XtIGN36GmO0fPMkR/pub?gid=596836111&single=true&output=csv";
 const money = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',minimumFractionDigits:0,maximumFractionDigits:2});
 let lastSuccess = null;
@@ -130,8 +142,7 @@ async function refreshProgress() {
     const response = await fetch(TOTALS_URL, {credentials:'omit',signal:AbortSignal.timeout(15000)});
     if (!response.ok) throw new Error('Totals unavailable');
     const text = await response.text();
-    const rows = text.trim().split(/\r?\n/).map(row => row.split(','));
-    const metrics = Object.fromEntries(rows.slice(1).map(([key,value]) => [key,Number(value)]));
+    const metrics = parsePublishedTotals(text);
     const goal=metrics['Goal'], total=metrics['Total pledged'];
     if (!Number.isFinite(goal) || goal<=0 || !Number.isFinite(total) || total<80) throw new Error('Invalid totals');
     const remaining=Math.max(0,goal-total), percent=Math.round(total/goal*100);
