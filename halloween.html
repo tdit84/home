@@ -16,6 +16,8 @@ a{color:inherit}header,main,footer{max-width:1120px;margin:auto;padding:24px}hea
 
 main{max-width:920px;padding-top:18px}.hero{grid-template-columns:1.2fr 1fr;gap:20px;padding:0 18px 16px}h1{font-size:clamp(40px,5vw,58px);margin:12px 0 14px}.illustration{max-width:260px;justify-self:end}.dashboard{gap:18px}.card{padding:26px}.card h2{font:650 23px/1.3 system-ui;margin-bottom:8px}.choice{text-decoration:none}.choice:hover{background:#604050}.privacy{border-top:1px solid #49394f;padding-top:14px;margin-bottom:0}.warning{margin-top:18px}.milestone{font-size:14px}.small{font-size:12px}footer{max-width:920px;margin-top:18px;padding-top:14px;padding-bottom:20px}
 @media(max-width:720px){main{padding:16px}.hero{grid-template-columns:1fr auto;padding:0 4px 12px;gap:6px}.hero .illustration{width:116px;margin:0}.tag{font-size:10px;letter-spacing:.1em}h1{font-size:33px;line-height:1.1;margin:8px 0 0}.dashboard{gap:14px}.card{padding:20px;border-radius:20px}.amount{margin:3px 0 10px}.amount strong{font-size:44px}.stats{margin-bottom:15px}.milestone{padding:11px 13px}.warning{padding:11px 13px;font-size:12px;margin-top:14px}.card h2{font-size:22px}.choices{margin:16px 0}.choice{padding:10px 4px}.pledge-copy{font-size:14px;margin-top:6px}.button{padding:13px}.small{margin:10px 0}.privacy{margin-bottom:0}footer{font-size:11px;margin-top:10px;padding:10px 20px 18px}}
+
+button.choice{font:650 16px system-ui;color:var(--ink);background:transparent;cursor:pointer}button.choice.featured{background:#51382f;color:#ffd2a9}#inline-pledge{border:0;padding:0}#inline-pledge>summary{list-style:none}#inline-pledge>summary::-webkit-details-marker{display:none}#inline-pledge[open]>summary{background:#3e3049;color:var(--ink);margin-bottom:14px}#embedded-form iframe{display:block;width:100%;min-height:690px;background:#f0ebf7;border-radius:12px}#pledge{min-width:0}@media(max-width:720px){#embedded-form{margin:0 -12px}#embedded-form iframe{min-height:760px}}
 </style>
 </head>
 <body>
@@ -42,13 +44,27 @@ main{max-width:920px;padding-top:18px}.hero{grid-template-columns:1.2fr 1fr;gap:
 </section>
 <section class="dashboard" aria-label="Fundraising progress and pledge">
 <article class="card"><span class="tag">Our progress</span><div class="amount"><strong id="total">$80</strong><span id="goal">pledged of $200</span></div><progress id="progress" value="80" max="200" aria-label="Fundraiser progress">$80 of $200</progress><div class="stats"><span id="percent">40% pledged</span><span id="remaining">$120 to go</span></div><p class="milestone" id="milestone">Just <strong>4 families at $30</strong> to reach our goal!</p><p class="small" id="freshness">Checking the latest total…</p><aside class="warning"><strong>Heads up: updates aren’t instant.</strong>After you submit a pledge, the public total may take a few minutes to refresh. Please don’t submit again just because the number hasn’t changed.</aside></article>
-<article class="card" id="pledge"><h2>Add your pledge</h2><p class="pledge-copy">$30 suggested per family. Any amount welcome.</p><div class="choices" aria-label="Choose a pledge amount"><a class="choice" href="https://docs.google.com/forms/d/e/1FAIpQLSf8gawxr5EZIExFagD9mEXy0VN_3ypdWpK0OKan6C7vp3YYZQ/viewform?usp=pp_url&amp;entry.386686820=10" target="_blank" rel="noopener" aria-label="Pledge 10 dollars">$10</a><a class="choice" href="https://docs.google.com/forms/d/e/1FAIpQLSf8gawxr5EZIExFagD9mEXy0VN_3ypdWpK0OKan6C7vp3YYZQ/viewform?usp=pp_url&amp;entry.386686820=20" target="_blank" rel="noopener" aria-label="Pledge 20 dollars">$20</a><a class="choice featured" href="https://docs.google.com/forms/d/e/1FAIpQLSf8gawxr5EZIExFagD9mEXy0VN_3ypdWpK0OKan6C7vp3YYZQ/viewform?usp=pp_url&amp;entry.386686820=30" target="_blank" rel="noopener" aria-label="Pledge 30 dollars">$30 ★</a><a class="choice" href="https://docs.google.com/forms/d/e/1FAIpQLSf8gawxr5EZIExFagD9mEXy0VN_3ypdWpK0OKan6C7vp3YYZQ/viewform?usp=pp_url&amp;entry.386686820=50" target="_blank" rel="noopener" aria-label="Pledge 50 dollars">$50</a></div><a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSf8gawxr5EZIExFagD9mEXy0VN_3ypdWpK0OKan6C7vp3YYZQ/viewform?usp=pp_url&amp;entry.386686820=30" target="_blank" rel="noopener">Pledge now ↗</a><p class="small">Opens a short Google Form. No sign-in needed.</p><p class="small privacy">Only the combined total is public. Family names and individual amounts stay private.</p></article>
+<article class="card" id="pledge"><h2>Add your pledge</h2><p class="pledge-copy">$30 suggested per family. Any amount welcome.</p><div class="choices" aria-label="Choose a pledge amount"><button type="button" class="choice" data-pledge="10" aria-label="Pledge 10 dollars">$10</button><button type="button" class="choice" data-pledge="20" aria-label="Pledge 20 dollars">$20</button><button type="button" class="choice featured" data-pledge="30" aria-label="Pledge 30 dollars">$30 ★</button><button type="button" class="choice" data-pledge="50" aria-label="Pledge 50 dollars">$50</button></div><details id="inline-pledge"><summary class="button">Pledge now</summary><div id="embedded-form"></div></details><p class="small">Complete the short form right here. No sign-in needed.</p><p class="small privacy">Only the combined total is public. Family names and individual amounts stay private.</p></article>
 </section>
 
 </main><footer><span>Halloween block party · October 31</span></footer>
 <script>
+const EMBED_BASE="https://docs.google.com/forms/d/e/1FAIpQLSf8gawxr5EZIExFagD9mEXy0VN_3ypdWpK0OKan6C7vp3YYZQ/viewform?embedded=true&usp=pp_url&entry.386686820=";
+const pledgeDetails=document.getElementById('inline-pledge');
+function loadPledge(amount=30){
+  let frame=document.querySelector('#embedded-form iframe');
+  if(!frame){frame=document.createElement('iframe');frame.title='Private family pledge form';frame.referrerPolicy='strict-origin-when-cross-origin';document.getElementById('embedded-form').append(frame);}
+  const url=EMBED_BASE+amount;
+  if(frame.getAttribute('src')!==url)frame.src=url;
+}
+pledgeDetails.addEventListener('toggle',()=>{if(pledgeDetails.open&&!document.querySelector('#embedded-form iframe'))loadPledge();});
+document.querySelectorAll('[data-pledge]').forEach(button=>button.addEventListener('click',()=>{
+  loadPledge(Number(button.dataset.pledge));pledgeDetails.open=true;
+  document.querySelectorAll('[data-pledge]').forEach(item=>item.classList.toggle('featured',item===button));
+}));
+
 const TOTALS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTdiZImvR7WCK2mx1rZwaigmxZgD4Qyb95XO0fx_r-f6-9gFWtaykYIRcqXgBP4XtIGN36GmO0fPMkR/pub?gid=596836111&single=true&output=csv";
-const money = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',maximumFractionDigits:2});
+const money = new Intl.NumberFormat('en-US', {style:'currency',currency:'USD',minimumFractionDigits:0,maximumFractionDigits:2});
 let lastSuccess = null;
 async function refreshProgress() {
   const status = document.getElementById('freshness');
